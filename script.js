@@ -16,12 +16,19 @@ function addBookToLibrary (name, author, pages, genre) {
 }
 
 function displayLibrary(books) {
-    for (book in books) {
+    books.forEach(book => {
         let newBookDiv = document.createElement("div");
         newBookDiv.classList.add("book-card");
 
+        let fullHtml = `
+        <h1>${book.name}</h1>
+        <p>By: ${book.author}</p>
+        <p>Page Count: ${book.pages}<p>
+        <p>Genre: ${book.genre}<p>
+        `
+        newBookDiv.innerHTML = fullHtml;
         library.appendChild(newBookDiv);
-    }
+    });
 }
 
 /* Placeholder books for testing */

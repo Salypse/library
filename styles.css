@@ -2,13 +2,23 @@
     --main-background-color: #813405;
     --content-backround-color: #f8dda4;
     --book-card-background-color: #d45113;
+    --book-button-hover: #ecdfc5;
+    --book-button-click: #f0cc85;
     --library-text-color: #f9a03f;
+}
+
+@font-face {
+    font-family: "sansation";
+    src: url("./font/sansation/Sansation-Regular-webfont.woff");
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    font-family: "sansation", sans-serif;
+    font-weight: 700;
 }
 
 body {
@@ -52,9 +62,57 @@ body > h1 {
     margin: 1rem;
     padding: 1rem;
     background-color: var(--book-card-background-color);
+    color: var(--library-text-color);
+    font-weight: 700;
 
     width: 95%;
-    height: 300px;
+    height: 25vh;
     border-radius: 50px;
     border-left: var(--main-background-color) 1rem solid;
+
+}
+
+.book-card h1 {
+    justify-self: center;
+}
+
+.book-author {
+    justify-self: center;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.book-info {
+    display: flex;
+    padding: 0.6rem;
+
+    justify-content:space-around;
+    align-items: center;
+}
+
+.book-buttons {
+    margin: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-buttons > *:hover {
+    cursor: pointer;
+    background-color: var(--book-button-hover);
+}
+
+.book-buttons > *:active {
+    background-color: var(--book-button-click);
+}
+
+.book-buttons > button {
+    padding: 1rem 2rem;
+
+    background-color: var(--content-backround-color);
+    border: 5px solid var(--main-background-color);
+    border-radius: 10px;
+
+    font-size: 1rem;
+
+    width: 33%;
 }

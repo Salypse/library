@@ -8,7 +8,35 @@
 </head>
 <body>
     <h1>Library</h1>
+    <button class="add-book">Add Book</button>
     <div class="library"></div>
-    <script src="./script.js"></script>
+    <div class="submit-book">
+        <form>
+            <input type="text" id="book_title" name="book_title" placeholder="Title" required>
+            <input type="text" id="book_author" name="book_author" placeholder="Author" required>
+            <input type="number" id="book_pages" name="book_pages" placeholder="Pages" required>
+            <select name="book_genre" id="book_genre">
+                <option value="" disabled selected >Genre</option>
+                <option value="action_adventure">Action/Adventure</option>
+                <option value="children">Children</option>
+                <option value="comedy">Comedy</option>
+                <option value="crime">Crime</option>
+                <option value="drama">Drama</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="historical">Historical</option>
+                <option value="horror">Horror</option>
+                <option value="mystery">Mystery</option>
+                <option value="poetry">Poetry</option>
+                <option value="romance">Romance</option>
+                <option value="science_fiction">Science Fiction</option>
+            </select>
+            <div class="read-book">
+                <label for="read_book">Read </label>
+                <input type="checkbox" id="read_book" value="has_read">
+            </div>
+            <button type="submit">Submit Book</button>
+        </form>
+    </div>
+    <script src="./script.js"></script> 
 </body>
 </html>

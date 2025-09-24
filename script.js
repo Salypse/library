@@ -44,4 +44,4 @@ addBookToLibrary("Red Rising", "Pierce Brown", "382", "Science Fiction", "Read")
 addBookToLibrary("The FellowShip of the Ring", "J. R. R. Tolkien", "423", "Fantasy", "Not Read")
 
 /* Shows all books on user screen */
-displayLibrary(myLibrary)
+/* displayLibrary(myLibrary) */

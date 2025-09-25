@@ -105,8 +105,3 @@ submitBook.addEventListener("submit", function(event) {
     submitBook.style.display = "none";
     displayLibrary(myLibrary)
 })
-
-/* 
-TODO
-    Remove Book button
-*/

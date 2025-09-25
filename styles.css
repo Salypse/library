@@ -141,6 +141,8 @@ button {
     background-color: var(--content-backround-color);
     border: 5px solid var(--book-card-background-color);
     border-radius: 10px;
+
+    display: none;
 }
 
 .submit-book form {

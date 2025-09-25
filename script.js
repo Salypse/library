@@ -1,22 +1,51 @@
 const library = document.querySelector(".library");
+const addBookButton = document.querySelector(".add-book");
+const submitBook = document.querySelector(".submit-book");
+const submitBookButton = document.querySelector("#submit-book-button");
 
-const myLibrary = [];
+/* New book form data */
+const book_title = document.querySelector("#book_title");
+const book_author = document.querySelector("#book_author");
+const book_pages = document.querySelector("#book_pages");
+const book_genre = document.querySelector("#book_genre");
+const read_book = document.querySelector("#read_book");
+
+let myLibrary = [];
 
 function Book(name, author, pages, genre, readStatus) {
     this.name = name;
     this.author = author;
     this.pages = pages;
     this.genre = genre;
-    this.readStatus = readStatus;
+    this.readStatus = readStatus === true ? "Read" : "Not Read";
     this.id = crypto.randomUUID()
 }
 
+Book.prototype.updateReadStatus = function() {
+    return this.readStatus = this.readStatus === "Read" ? "Not Read" : "Read"
+}
+
 function addBookToLibrary (name, author, pages, genre, readStatus) {
-    let newBook = new Book(name, author, pages, genre, readStatus)
+    let newBook = new Book(name, author, pages, formatGenre(genre), readStatus)
     myLibrary.push(newBook)
 }
 
+function removeBookFromLibrary(id) {
+    myLibrary = myLibrary.filter(book => book.id !== id)
+    displayLibrary(myLibrary)
+}
+
+function formatGenre(genre) {
+    if (genre.includes("_")) {
+        genre = genre.split("_").join(" ");
+    }
+    return genre.charAt(0).toUpperCase() + genre.slice(1);
+}
+
 function displayLibrary(books) {
+    library.style.display = "grid"
+    library.innerHTML = "";
+
     books.forEach(book => {
         let newBookDiv = document.createElement("div");
         newBookDiv.classList.add("book-card");
@@ -34,14 +63,50 @@ function displayLibrary(books) {
         </div>
         `
         newBookDiv.innerHTML = fullHtml;
+
+        /* Change read status button for each book */
+        let readStatusButton = newBookDiv.querySelector(".read-status");
+        readStatusButton.addEventListener("click", () => {
+            readStatusButton.textContent = book.updateReadStatus()
+        })
+
+        let removeBookButton = newBookDiv.querySelector(".remove-book");
+        removeBookButton.addEventListener("click", () => {
+            removeBookFromLibrary(book.id)
+        })
+
         library.appendChild(newBookDiv);
     });
 }
 
-/* Placeholder books for testing */
-addBookToLibrary("Mistborn", "Brandon Sanderson", "541", "Fantasy", "Read")
-addBookToLibrary("Red Rising", "Pierce Brown", "382", "Science Fiction", "Read")
-addBookToLibrary("The FellowShip of the Ring", "J. R. R. Tolkien", "423", "Fantasy", "Not Read")
+/* Shows the submit book ui when clicked */
+addBookButton.addEventListener("click", () => {
+    book_title.value = "";
+    book_author.value = "";
+    book_pages.value = "";
+    book_genre.selectedIndex = 0;
+    read_book.checked = false;
 
-/* Shows all books on user screen */
-/* displayLibrary(myLibrary) */
+    submitBook.style.display = "block";
+    library.style.display = "none";
+});
+
+/* When add book form submitted display library with new book */
+submitBook.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let title = book_title.value;
+    let author = book_author.value;
+    let page_count = book_pages.value;
+    let genre = book_genre.value;
+    let read_status = (read_book.checked) ? true : false
+
+    addBookToLibrary(title, author, page_count, genre, read_status);
+    submitBook.style.display = "none";
+    displayLibrary(myLibrary)
+})
+
+/* 
+TODO
+    Remove Book button
+*/
